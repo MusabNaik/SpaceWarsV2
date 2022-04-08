@@ -107,7 +107,8 @@ const player = new Player() //Create new instance of Player class
 const bullets = [] //Array to store instance of Bullet class
 const enemys = [] //Array to store instance of Enemy class
 for (let i = 0; i < number_of_enemies; i++) {
-    setTimeout(() => {enemys.push(new Enemy(Math.floor(Math.random() * canvas.width),0))}, 1000 * i)
+    setTimeout(() => {enemys.push(new Enemy(Math.floor(Math.random() * (canvas.width - 60)),0))}, 1000 * i)
+    //"-60" to make sure enemy ship are not spawned outside the canvas width
 }
 
 //Variable to track key preassed status
@@ -165,7 +166,8 @@ function animate() {
     enemys.forEach((enemy,index) => {
         enemy.update()
         if (enemy.delete) {
-            enemy.position.x = Math.floor(Math.random() * canvas.width)
+            enemy.position.x = Math.floor(Math.random() * (canvas.width - enemy.size))
+            //"- enemy.size" to make sure enemy ship are not spawned outside the canvas width
             enemy.position.y = 0
             enemy.delete = false
         } 
